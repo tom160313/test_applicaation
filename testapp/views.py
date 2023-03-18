@@ -6,8 +6,8 @@ from testapp.models.employee import Employee
 @app.route('/')
 def index():
     my_dict = {
-        'insert_something1': 'views.pyのinsert_something1部分です。',
-        'insert_something2': 'views.pyのinsert_something2部分です。',
+        'insert_something1': 'テスト用従業員登録ページです。',
+        'insert_something2': 'Navbarから従業員登録・従業員一覧を表示することができます。',
         'test_titles': ['title1', 'title2', 'title3']
     }
     return render_template('testapp/index.html', my_dict=my_dict)
