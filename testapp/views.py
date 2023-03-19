@@ -3,6 +3,21 @@ from testapp import app
 from testapp import db
 from testapp.models.employee import Employee
 
+# chart.js テスト========================================
+# https://qiita.com/kubochiro/items/874ccddb564c7e684000
+import os
+@app.route('/graph')
+def chart_do():
+    c = {
+        'chart_labels': "項目1, 項目２, 項目３, 項目４,項目５",
+        'chart_data': "4, 7, 1, 3, 6",
+        'chart_title': "グラフサンプル",
+        'chart_target': "タイトル"
+    }
+    return render_template('testapp/graph.html', c=c)
+# =======================================================
+
+
 @app.route('/')
 def index():
     my_dict = {
