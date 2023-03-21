@@ -3,6 +3,11 @@ from testapp import app
 from testapp import db
 from testapp.models.employee import Employee
 
+# 新規DB(sampledataテーブル)追加に伴うデータ書き込み処理============
+from testapp.models.sampledata import Sampledata
+import datetime
+# ==============================================================
+
 # chart.js テスト========================================
 # https://qiita.com/kubochiro/items/874ccddb564c7e684000
 import os
@@ -59,3 +64,30 @@ def add_employee():
 def employee_list():
     employees = Employee.query.all()
     return render_template('testapp/employee_list.html', employees=employees)
+
+
+#====================================#
+#=========サンプルデータ追加==========#
+#====================================#
+@app.route('/add_sampledata', methods=['GET', 'POST'])
+def add_sampledata():
+    if request.method == 'GET':
+        return render_template('testapp/add_sampledata.html')
+    if request.method == 'POST':
+        nowdatetime = datetime.datetime(2017, 11, 14, 11, 25, 28)
+
+        sampledata = Sampledata(
+            getdate = nowdatetime.date(),
+            gettime = nowdatetime.time(),
+            speed = 28,
+            itemno = 1,
+            peak = 236
+        )
+        db.session.add(sampledata)
+        db.session.commit()
+        return redirect(url_for('index'))
+
+@app.route('/sampledatalist')
+def data_list():
+    sampledatalist = Sampledata.query.all()
+    return render_template('testapp/sampledata_list.html', sampledatalist=sampledatalist)

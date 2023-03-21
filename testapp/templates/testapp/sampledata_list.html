@@ -1,0 +1,31 @@
+{% extends "testapp/layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>データリスト</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">日付</th>
+              <th scope="col">時間</th>
+              <th scope="col">品番</th>
+              <th scope="col">運転速度</th>
+              <th scope="col">ピーク負荷率</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for sampledata in sampledatalist %}
+            <tr>
+              <th scope="row">{{ sampledata.id }}</th>
+              <td>{{ sampledata.getdate }}</td>
+              <td>{{ sampledata.gettime }}</td>
+              <td>{{ sampledata.itemno }}</td>
+              <td>{{ sampledata.speed }}</td>
+              <td>{{ sampledata.peak }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+</div>
+{% endblock %}
