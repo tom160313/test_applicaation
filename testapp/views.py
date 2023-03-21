@@ -91,3 +91,8 @@ def add_sampledata():
 def data_list():
     sampledatalist = Sampledata.query.all()
     return render_template('testapp/sampledata_list.html', sampledatalist=sampledatalist)
+
+@app.route('/linechart')
+def line():
+    getdatalist = Sampledata.query.all()
+    return render_template('testapp/linechart.html')
