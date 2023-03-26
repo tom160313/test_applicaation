@@ -4,6 +4,15 @@
 <div class="container mt-4">
     <h2>データの追加だけ行うページ</h2>
     <form action="/add_sampledata" method="POST">
+        <label for="speed">運転速度</label>
+        <input type="number" name="speed" min="0">
+
+        <label for="peak">ピーク負荷率</label>
+        <input type="number" name="peak" min="0">
+
+        <label for="itemno">品番</label>
+        <input type="number" name="itemno" min="0">
+
         <button type="submit" class="btn btn-primary">データ追加</button>
     </form>
 </div>

@@ -75,13 +75,16 @@ def add_sampledata():
         return render_template('testapp/add_sampledata.html')
     if request.method == 'POST':
         nowdatetime = datetime.datetime(2017, 11, 14, 11, 25, 28)
+        form_speed = request.form.get('speed', default=0, type=int)
+        form_peak = request.form.get('peak', default=0, type=int)
+        form_itemno = request.form.get('itemno', default=0, type=int)
 
         sampledata = Sampledata(
             getdate = nowdatetime.date(),
             gettime = nowdatetime.time(),
-            speed = 28,
-            itemno = 1,
-            peak = 236
+            speed = form_speed,
+            itemno = form_itemno,
+            peak = form_peak
         )
         db.session.add(sampledata)
         db.session.commit()
@@ -95,4 +98,27 @@ def data_list():
 @app.route('/linechart')
 def line():
     getdatalist = Sampledata.query.all()
-    return render_template('testapp/linechart.html')
+    list_1 = []
+    list_2 = []
+    list_3 = []
+    list_4 = []
+
+    for getdata_1 in getdatalist:
+        list_1.append(getdata_1.speed)
+    # print(list_1)
+
+    for getdata_2 in getdatalist:
+        list_2.append(getdata_2.peak)
+    # print(list_2)
+
+    for getdata_3 in getdatalist:
+        list_3.append(str(getdata_3.getdate))
+    # print(list_3)
+    
+    for x in range(len(list_3)):
+        list_4.append(x)
+        x += 1
+    # print(list_4)
+
+
+    return render_template('testapp/linechart.html', list_1 = list_1, list_2 = list_2, list_4 = list_4)
