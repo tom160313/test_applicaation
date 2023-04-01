@@ -122,3 +122,12 @@ def line():
 
 
     return render_template('testapp/linechart.html', list_1 = list_1, list_2 = list_2, list_4 = list_4)
+
+
+# サンプルデータリストページ 削除ボタン追加
+@app.route('/sampledatalist/<int:id>/delete', methods=['POST'])  
+def sampledatalist_delete(id):  
+    sampledatalist = Sampledata.query.get(id)   
+    db.session.delete(sampledatalist)  
+    db.session.commit()  
+    return redirect(url_for('data_list'))
