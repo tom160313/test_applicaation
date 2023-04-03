@@ -1,7 +1,11 @@
+import os
 from flask import render_template, request, redirect, url_for  # 追加
 from testapp import app
 from testapp import db
 from testapp.models.employee import Employee
+
+# 写真のデータ授受
+from werkzeug.utils import secure_filename
 
 # 新規DB(sampledataテーブル)追加に伴うデータ書き込み処理============
 from testapp.models.sampledata import Sampledata
@@ -131,3 +135,24 @@ def sampledatalist_delete(id):
     db.session.delete(sampledatalist)  
     db.session.commit()  
     return redirect(url_for('data_list'))
+
+
+# 写真データのアップロード
+#-----ファイルのアップロード-----#
+#GETの処理
+@app.route('/up/', methods=['GET'])
+def up_get():
+    return render_template('testapp/up.html', message = '画像を選択しよう', flag = False)
+
+#POSTの処理
+@app.route('/up/', methods=['POST'])
+def up_post():
+    # ファイルのリクエストパラメータを取得
+    f = request.files.get('image')
+    # ファイル名を取得
+    filename = secure_filename(f.filename)
+    # ファイルを保存するディレクトリを指定
+    filepath = 'testapp/static/image/' + filename
+    # ファイルを保存する
+    f.save(filepath)
+    return render_template('testapp/up.html', title = 'Form Sample(post)', message = 'アップロードされた画像({})'.format(filename), flag = True, image_name = filename)
