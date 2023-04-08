@@ -8,7 +8,7 @@ from testapp.models.employee import Employee
 from werkzeug.utils import secure_filename
 # static/imageデータリスト作成
 import pathlib
-import cv2
+# import cv2
 import numpy as np
 
 # 新規DB(sampledataテーブル)追加に伴うデータ書き込み処理============
