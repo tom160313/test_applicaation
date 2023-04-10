@@ -1,18 +1,15 @@
-{% extends "testapp/layout.html" %}
-
-{% block content %}
-<p>{{ message }}</p>
-<!--POSTの時の処理(画像を表示する)-->
-{%- if flag==true %}
-<div><img src="../testapp/static/image/{{ image_name }}" alt ="{{ image_name }}"></div>
-{%- else %}
-<form action="/up/" method="POST" enctype="multipart/form-data">
-    <div>
-        <input type="file" name="image" accept="image/*" required>
-    </div>
-    <div>
-        <input type="submit" value="写真を送る">
-    </div>
-</form>
-{%- endif %}
-{% endblock %}
+<!doctype html>
+    <p>{{ message }}</p>
+    <!--POSTの時の処理(画像を表示する)-->
+    {%- if flag==true %}
+    <div><img src="../testapp/static/image/{{ image_name }}" alt ="{{ image_name }}"></div>
+    {%- else %}
+    <form action="/up/" method="POST" enctype="multipart/form-data">
+        <div>
+            <input type="file" name="image" accept="image/*" required>
+        </div>
+        <div>
+            <input type="submit" value="写真を送る">
+        </div>
+    </form>
+    {%- endif %}
