@@ -1,4 +1,6 @@
-<!doctype html>
+{% extends "testapp/layout.html" %}
+
+{% block content %}
     <p>{{ message }}</p>
     <!--POSTの時の処理(画像を表示する)-->
     {%- if flag==true %}
@@ -13,3 +15,5 @@
         </div>
     </form>
     {%- endif %}
+
+{% endblock %}
